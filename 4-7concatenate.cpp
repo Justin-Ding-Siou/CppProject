@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-using namespace std;
+
 void concatenate(arrayString& s1, arrayString& s2){
   int s1_OldLength = length(s1);
   int s2_Length = length(s2);
@@ -37,11 +37,7 @@ void concatenateTester(){
   cout << a << "\n" << c << "\n";
   cout << (void *) a << "\n" << (void *) c << "\n";
 
-}
 
-int main() {
+  return 0;
 
-  cout << concatenateTester() << "\n";
-
-	return 0;
 }

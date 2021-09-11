@@ -7,4 +7,14 @@
 
 c++ 配置記憶體的方法: stack: 有序的放，heap :亂放
 
-ex: append concatenate TracingStudent追蹤未知數量的學生紀錄
+ex:
+
+append
+
+concatenate 
+
+
+TracingStudent追蹤未知數量的學生紀錄
+
+1.addRecord
+2.averageRecord

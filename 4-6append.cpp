@@ -18,23 +18,11 @@ void append(arrayString& s,char c) {
   newS[oldLength + 1 ] = 0;
   delete[] s;
   s = newS;
-
-
 }
 // append
-void  appendTester() {
+void appendTester() {
   arrayString a = new char[5];
   a[0] = 't'; a[1] = 'e'; a[2] = 's'; a[3] = 't'; a[4] = 0;
   append(a, '!');
   cout << a << '\n';
-
-}
-
-
-int main() {
-
-
-  cout << appendTester(a) << "\n";
-
-	return 0;
 }
