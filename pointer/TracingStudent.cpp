@@ -16,6 +16,7 @@ typedef listNode * studentCollection;
 
 int main() {
 
+  //-> 指向節點 listnode 的欄位
   studentCollection sc;
   listNode * node1 = new listNode;
   node1 -> studentNum = 1001; node1 -> grade = 78;
@@ -23,6 +24,8 @@ int main() {
   node2 -> studentNum = 1012; node1 -> grade = 93;
   listNode * node3 = new listNode;
   node3 -> studentNum = 1076; node1 -> grade = 85;
+  
+  //建立 linked
   sc = node1;
   node1 -> next = node2;
   node2 -> next = node3;
