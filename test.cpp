@@ -1,87 +1,164 @@
-// C++ code
-#include <iostream>
-#include <iomanip> // for std::setw()
-
-int FindSetCollapsing(int *subset, int i)
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+class STUDENT
 {
+ int STU_ROLL;
+ char STU_NAME[20];
+ char STU_SEC[20];
+ char STU_DEPT[20];
+ public:
+ 	int Insert(STUDENT *p,int n)
+	{
+	 cout<<"Enter ROll: ";
+	cin>>p[n].STU_ROLL;
+	cout<<"Enter Name: ";
+	cin>> p[n].STU_NAME;
+	cout<< "Enter SECTION: ";
+	cin>> p[n].STU_SEC;
+	cout<<"Enter DEPT: ";
+	cin>> p[n].STU_DEPT;
+	cout<<"\nRECORD INSERTED...\n";
+	n++;
+	return n;
+	}
+	void Search(STUDENT *p,int roll,int n)
+	{
+	int i=0;
+	for( i=0;i<n;i++)
+	{
+	   if(p[i].STU_ROLL==roll)
+    		{
+		cout<<"ROLL\tNAME\tSEC\tDEPT\n==============================================\n";
+	    	cout<<STU_ROLL<<"\t"<<STU_NAME<<"\t"<<STU_SEC<<"\t"<<STU_DEPT<<"\n";
+		break;
+    		}
+	}
+	if(p[i].STU_ROLL!=roll)
+	{
+	cout<<"\nRECORD NOT FOUND.\n";
+	}
 
-    int root;
-    for (root = i; subset[root] >= 0; root = subset[root])
-        ; // 找到root
-
-    while (i != root)
-    { // 進行collapsing
-        int parent = subset[i];
-        subset[i] = root;
-        i = parent;
     }
 
-    return root;
-}
-
-void UnionSet(int *subset, int x, int y)
-{
-
-    int xroot = FindSetCollapsing(subset, x),
-        yroot = FindSetCollapsing(subset, y);
-
-    // 用rank比較, 負越多表示set越多element, 所以是值比較小的element比較多
-    // xroot, yroot的subset[]一定都是負值
-
-    // x比較多element或是一樣多的時候, 以x作為root
-    if (subset[xroot] <= subset[yroot])
-    {
-        subset[xroot] += subset[yroot];
-        subset[yroot] = xroot;
-    }
-    else
-    { //  subset[xroot] > subset[yroot], 表示y比較多element
-        subset[yroot] += subset[xroot];
-        subset[xroot] = yroot;
-    }
-}
-
-void PrintArray(int *array, int size)
-{
-
-    for (int i = 0; i < size; i++)
-    {
-        std::cout << std::setw(3) << i;
-    }
-    std::cout << std::endl;
-    for (int i = 0; i < size; i++)
-    {
-        std::cout << std::setw(3) << array[i];
-    }
-    std::cout << std::endl;
-}
-
+	void Display(){
+	cout<<STU_ROLL<<"\t"<<STU_NAME<<"\t"<<STU_SEC<<"\t"<<STU_DEPT<<"\n";
+	}
+	int Del(STUDENT *p,int n,int roll)
+	{
+		int j=0,k,flag=0;
+		for(j=0;j<n;j++)
+		{
+			if(p[j].STU_ROLL==roll)
+            {
+                flag=1;
+                break;
+            }
+		}
+        if(flag==1)
+        {
+            for(k=j;k<n;k++)
+            {
+            p[k]=p[k+1];
+            }
+            cout<<"\nRECORD DELETED.\n";
+            return n-1;
+        }
+			else
+			{
+				cout<<"\nRecord Not Found\n";
+				return n;
+			}
+	}
+	int Update(STUDENT *p,int roll,int n)
+	{
+		int i,ch1;
+		for(i=0;i<n;i++)
+		{
+		if(p[i].STU_ROLL==roll)
+    		{
+    			while(1){
+    			cout<<"\n!!===OPTIONS IN UPDATE===!!\n";
+    			cout<<"\n 1. Update Section";
+    			cout<<"\n 2. Update Deptarment";
+   				cout<<"\n 3. Update Both";
+   				cout<<"\n 4. Return to main Menu";
+   				cout<<"\n\n Enter Your Choice:";
+   				cin>>ch1;
+				switch(ch1){
+    				case 1: cout<<"Section:";
+    						cin>>p[i].STU_SEC;
+    						cout<<"Record Updated...\n";
+    						break;
+   					case 2: cout<<"DEPT:\t";
+   							cin>>p[i].STU_DEPT;
+   							cout<<"Record Updated...\n";
+   							break;
+					case 3: cout<<"Section:";
+							cin>>p[i].STU_SEC;
+							cout<<"DEPT:\t";
+							cin>>p[i].STU_DEPT;
+							cout<<"Record Updated...\n";
+							break;
+					case 4: return n;
+					default: cout<<"!! Wrong Key !!";
+							break;
+					}
+				}
+			break;
+    		}
+		}
+    		if(p[i].STU_ROLL!=roll)
+		{
+    		cout<<"\nRecord Not Found\n\n";
+		}
+	}
+};
 int main()
 {
+ STUDENT o[10];
+ int i=0,ch,j,roll;
+ while(1)
+  {
+   cout<<"\n!!===STUDENT MANAGMENT SYSTEM===!!";
+   cout<<"\n";
+   cout<< "\n 1.INSERT";
+   cout<< "\n 2.SEARCH";
+   cout<< "\n 3.DISPLAY";
+   cout<< "\n 4.DELETE";
+   cout<< "\n 5.UPDATE";
+   cout<< "\n 6.EXIT";
+   cout<< "\n\n ENTER YOUR CHOICE:";
+   cin>> ch;
+   switch(ch){
+     case 1: i=o[0].Insert(o,i);
+               break;
+     case 3: cout<<"ROLL\tNAME\tSEC\tDEPT\n==============================================\n";
+		for(j=0;j<i;j++){
+		o[j].Display();
+		}
+		break;
+     case 2:
+		cout<<"Enter the ROLL for Search:";
+		cin>> roll;
 
-    const int size = 6;
-    int array[size] = {-1, -1, -1, -1, -1, -1};
-    PrintArray(array, size);
+		o[0].Search(o,roll,i);
 
-    UnionSet(array, 1, 2);
-    std::cout << "After union(1,2):\n";
-    PrintArray(array, size);
+		break;
+	 case 4:
+		cout<<"Enter the ROLL to Delete:";
+		cin>> roll;
+		i=o[0].Del(o,i,roll);
+		break;
+	 case 5:
+	 	cout<<"Enter the ROLL For Data Update:";
+		cin>> roll;
+		i=o[0].Update(o,roll,i);
+		break;
+	 default: cout<<"Wrong Key!!";
+	 		break;
+     case 6: exit(0);
+    }
+  }
 
-    UnionSet(array, 0, 2);
-    std::cout << "After union(0,2):\n";
-    PrintArray(array, size);
-
-    UnionSet(array, 3, 5);
-    std::cout << "After union(3,5):\n";
-    PrintArray(array, size);
-
-    UnionSet(array, 2, 5);
-    std::cout << "After union(2,5):\n";
-    PrintArray(array, size);
-
-    std::cout << "element(5) belongs to Set(" << FindSetCollapsing(array, 5) << ").\n";
-    std::cout << "After collapsing:\n";
-    PrintArray(array, size);
-
-    return 0;
-}
+ }
