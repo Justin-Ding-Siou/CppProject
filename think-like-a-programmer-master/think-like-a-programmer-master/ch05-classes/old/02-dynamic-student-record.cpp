@@ -9,7 +9,7 @@ struct student {
 class studentRecord {
   public:
     studentRecord();
-    studentRecord(int newGrade, int newID, std::string newName);
+    studentRecord(int newGrade, int newID, std::string newNam e);
     int grade();
     void setGrade(int newGrade);
     int studentID();
